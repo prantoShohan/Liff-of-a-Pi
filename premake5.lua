@@ -66,6 +66,9 @@ workspace "Liff_of_a_pi"
 	
 		targetdir "bin/%{cfg.buildcfg}"
 		objdir "bin-int/%{cfg.buildcfg}"
+
+		pchheader "liffpch.h"
+		pchsource "Liff/src/liffpch.cpp"
 	
 		files 
 		{ 		

@@ -55,7 +55,8 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>liffpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>Debug;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;..\external\glad\include;..\external\glfw\include;..\external\glm;..\external\imgui;..\external\imgui\examples;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -73,7 +74,8 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>liffpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>Release;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;..\external\glad\include;..\external\glfw\include;..\external\glm;..\external\imgui;..\external\imgui\examples;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -93,12 +95,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\EntryPoint.h" />
     <ClInclude Include="src\Liff.h" />
-    <ClInclude Include="src\source.h" />
+    <ClInclude Include="src\liffpch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\source.cpp" />
+    <ClCompile Include="src\Application.cpp" />
+    <ClCompile Include="src\liffpch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\external\GLFW.vcxproj">

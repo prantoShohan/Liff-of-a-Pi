@@ -1,8 +1,10 @@
 #pragma once
+#include "Application.h"
 
-extern void printqq();
+extern liff::Application* liff::create_application();
 
 
 int main() {
-	printqq();
+	auto app = liff::create_application();
+	app->run();
 }

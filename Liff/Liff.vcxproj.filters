@@ -12,19 +12,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Liff\Liff.h">
-      <Filter>include\Liff</Filter>
-    </ClInclude>
     <ClInclude Include="src\EntryPoint.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\source.h">
-      <Filter>src</Filter>
-    </ClInclude>
+    <ClInclude Include="src\Liff.h" />
+    <ClInclude Include="src\Application.h" />
+    <ClInclude Include="src\liffpch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\source.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
+    <ClCompile Include="src\Application.cpp" />
+    <ClCompile Include="src\liffpch.cpp" />
   </ItemGroup>
 </Project>
