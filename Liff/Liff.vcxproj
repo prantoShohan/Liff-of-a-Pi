@@ -97,14 +97,18 @@
   <ItemGroup>
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\EntryPoint.h" />
+    <ClInclude Include="src\Event.h" />
     <ClInclude Include="src\Liff.h" />
     <ClInclude Include="src\liffpch.h" />
+    <ClInclude Include="src\Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp" />
+    <ClCompile Include="src\Event.cpp" />
     <ClCompile Include="src\liffpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\external\GLFW.vcxproj">
