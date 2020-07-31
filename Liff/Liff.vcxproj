@@ -98,6 +98,7 @@
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\EntryPoint.h" />
     <ClInclude Include="src\Event.h" />
+    <ClInclude Include="src\Interfaces.h" />
     <ClInclude Include="src\Liff.h" />
     <ClInclude Include="src\liffpch.h" />
     <ClInclude Include="src\Window.h" />

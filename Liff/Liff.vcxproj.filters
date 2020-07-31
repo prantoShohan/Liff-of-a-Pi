@@ -20,6 +20,7 @@
     <ClInclude Include="src\liffpch.h" />
     <ClInclude Include="src\Window.h" />
     <ClInclude Include="src\Event.h" />
+    <ClInclude Include="src\Interfaces.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp" />
