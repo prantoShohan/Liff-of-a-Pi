@@ -10,14 +10,14 @@
 #include "Interfaces.h"
 
 namespace liff {
-	class Window {
+	class Window : public Rectangle{
 	protected:
 		int m_height;
 		int m_width;
 		std::string m_title;
 		
 	public:
-		Window(int width, int height, std::string title): m_height(height), m_width(width), m_title(std::move(title)){}
+		Window(Rectangle* rectangle,const std::string& title): Rectangle(rectangle), m_title(std::move(title)){}
 		
 		virtual void init() = 0;
 		virtual void destroy() = 0;
@@ -38,8 +38,8 @@ namespace liff {
 		ImGuiIO io;
 
 	public:
-		GLWindow(int width, int height, const std::string& title, EventListener* listener)
-			: Window(width, height, title), m_eventListener(listener) {}
+		GLWindow(Rectangle* rectangle, EventListener* listener, const std::string& title)
+			: Window(rectangle, title), m_eventListener(listener) {}
 		
 		void init() override;
 		void destroy() override;

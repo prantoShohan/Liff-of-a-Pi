@@ -7,16 +7,15 @@
 
 namespace liff {
 
-	class Application : EventListener {
+	class Application : public EventListener, public Rectangle {
 	private:
 		std::string m_title;
 		std::shared_ptr<Window> m_window;
 		bool m_running;
 		std::shared_ptr<RenderFrame> m_renderFrame;
-		
-		
+	
 	public:
-		explicit Application(std::string cs);
+		explicit Application(std::string cs, int width, int height);
 		void init();
 
 

@@ -2,12 +2,18 @@
 
 #include "Liff.h"
 
-class TestLayer : public liff::RenderFrame {
+class TestLayer   : public liff::RenderFrame {
 private:
 	bool sdw;
     unsigned int VAO;
     unsigned int shaderProgram;
+	
 public:
+
+
+	explicit TestLayer(Rectangle* parent)
+		: RenderFrame(parent) {}
+
 	void init() override {
 		sdw = true;
         const char* vertexShaderSource = "#version 330 core\n"
@@ -96,7 +102,7 @@ public:
 			ImGui::ShowDemoWindow(&sdw);
 		}
 
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+
 
         glUseProgram(shaderProgram);
         glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
@@ -109,13 +115,16 @@ class TestApplication: public liff::Application {
 
 public:
 	explicit TestApplication(const std::string& cs)
-		: Application(cs) {}
+		: Application(cs, 1280, 720) {}
 
 	std::shared_ptr<liff::Window> set_window() override {
-		return std::make_shared<liff::GLWindow>(1280, 720, "Liff", (liff::EventListener*)this);
+		return std::make_shared<liff::GLWindow>(this, this, "Liff");
 	}
 	std::shared_ptr<liff::RenderFrame> set_render_frame() override {
-		return std::make_shared<TestLayer>();
+		
+        auto stack = std::make_shared<liff::LayerStack>(this);
+        stack->push_layer(std::make_shared<TestLayer>(this));
+		return stack;
 	};
 private:
 	void do_something() override {
