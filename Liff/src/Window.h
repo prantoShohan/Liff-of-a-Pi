@@ -4,6 +4,7 @@
 #include <GLFW/glfw3.h>
 #include <imgui.h>
 
+#include <utility>
 
 
 #include "Interfaces.h"
@@ -16,8 +17,7 @@ namespace liff {
 		std::string m_title;
 		
 	public:
-		Window(int width, int height, std::string title): m_height(height), m_width(width), m_title(title){}
-		virtual ~Window() = default;
+		Window(int width, int height, std::string title): m_height(height), m_width(width), m_title(std::move(title)){}
 		
 		virtual void init() = 0;
 		virtual void destroy() = 0;
@@ -39,11 +39,8 @@ namespace liff {
 
 	public:
 		GLWindow(int width, int height, const std::string& title, EventListener* listener)
-			: Window(width, height, title), m_eventListener(listener) {
-			init();
-		}
-
-		~GLWindow() override {}
+			: Window(width, height, title), m_eventListener(listener) {}
+		
 		void init() override;
 		void destroy() override;
 

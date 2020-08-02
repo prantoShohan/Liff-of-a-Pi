@@ -99,7 +99,7 @@
     <ClInclude Include="src\EntryPoint.h" />
     <ClInclude Include="src\Event.h" />
     <ClInclude Include="src\Interfaces.h" />
-    <ClInclude Include="src\Layer.h" />
+    <ClInclude Include="src\RenderFrame.h" />
     <ClInclude Include="src\Liff.h" />
     <ClInclude Include="src\liffpch.h" />
     <ClInclude Include="src\Window.h" />
@@ -107,7 +107,6 @@
   <ItemGroup>
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\Event.cpp" />
-    <ClCompile Include="src\Layer.cpp" />
     <ClCompile Include="src\liffpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

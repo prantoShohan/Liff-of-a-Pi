@@ -1,16 +1,24 @@
 ﻿#include "liffpch.h"
 #include "Application.h"
 
+#include <utility>
+
 namespace liff {
+
+	Application::Application(std::string cs): m_title(std::move(cs)), m_running(true) { }
+
 	void Application::run() {
 		m_window = set_window();
+		m_window->init();
+		m_renderFrame = set_render_frame();
+		m_renderFrame->init();
 		
 		on_start();
 		setup();
 
 		while(m_running) {
 			m_window->begin();
-			update_layers();
+			update();
 			m_window->end();
 		}
 		do_something();
@@ -22,10 +30,9 @@ namespace liff {
 	void Application::on_end() {}
 	void Application::setup() {}
 
-	void Application::update_layers() {
-		for (auto& l : *m_layerStack) {
-			l->update();	
-		}
+	void Application::update() {
+		if(m_renderFrame)
+			m_renderFrame->update();
 	}
 
 	bool Application::on_window_resize(WindowResizeEvent& e) {
@@ -44,8 +51,6 @@ namespace liff {
 		EventDispatcher dispatcher(e);
 		dispatcher.dispatch<WindowResizeEvent>(std::bind(&Application::on_window_resize, this, std::placeholders::_1));
 		dispatcher.dispatch<WindowCloseEvent>(std::bind(&Application::on_window_close, this, std::placeholders::_1));
-		for (auto& l : *m_layerStack) {
-			l->on_event(e);
-		}
+		m_renderFrame->on_event(e);
 	}
 }
