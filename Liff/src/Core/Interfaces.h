@@ -6,24 +6,40 @@
 namespace liff {
 	class EventListener {
 	public:
+		virtual ~EventListener() = default;
 		virtual void on_event(liff::Event& e) = 0;
 	};
 
 	class Rectangle {
 	protected:
-		glm::vec2 m_position;
-		glm::vec2 m_size;
+		int m_pos_x;
+		int m_pos_y;
+
+		int m_size_x;
+		int m_size_y;
+		
 	public:
-		Rectangle(Rectangle* rectangle) { m_position = rectangle->get_position(); m_size = rectangle->get_size(); }
-		Rectangle(const glm::vec2& position, const glm::vec2& size)
-			: m_position(position),m_size(size) {}
+		Rectangle();;
+		Rectangle(Rectangle* rectangle):m_pos_x(rectangle->get_pos_x()), m_pos_y(rectangle->get_pos_y()), m_size_x(rectangle->get_size_x()), m_size_y(rectangle->get_size_y()) {}
+		Rectangle(int pos_x, int pos_y, int size_x, int size_y)
+			: m_pos_x(pos_x), m_pos_y(pos_y), m_size_x(size_x), m_size_y(size_y){}
 
-		virtual glm::vec2 get_position() const { return m_position; }
-		virtual glm::vec2 get_size() const { return m_size; }
+		int get_pos_x() const { return m_pos_x; }
+		int get_pos_y() const { return m_pos_y; }
+		int get_size_x() const { return m_size_x; }
+		int get_size_y() const { return m_size_y; }
+
+		void copy_rectangle(Rectangle* rectangle) {
+			m_pos_x = rectangle->get_pos_x();
+			m_pos_y = rectangle->get_pos_y();
+					   
+			m_size_x = rectangle->get_size_x();
+			m_size_y = rectangle->get_size_y();
+		}
 
 
-		virtual void set_position(const glm::vec2& position) { this->m_position = position; }
-		virtual void set_size(const glm::vec2& size) { this->m_size = size; }
+		void set_position(int x, int y) { m_pos_x = x; m_pos_y = y; }
+		void set_size(int x, int y) { m_size_x = x; m_size_y = y; }
 	};
 
 	

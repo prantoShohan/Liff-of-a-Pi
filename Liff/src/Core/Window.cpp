@@ -15,7 +15,7 @@ namespace liff {
 
 		// glfw window creation
 		// --------------------
-		m_window = glfwCreateWindow(m_size.x, m_size.y, m_title.data(), NULL, NULL);
+		m_window = glfwCreateWindow(m_size_x, m_size_y, m_title.data(), NULL, NULL);
 		if (m_window == NULL){
 			std::cout << "Failed to create GLFW window" << std::endl;
 			glfwTerminate();

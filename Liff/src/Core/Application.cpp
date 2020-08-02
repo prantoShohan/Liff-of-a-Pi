@@ -5,7 +5,7 @@
 
 namespace liff {
 
-	Application::Application(std::string cs, int width, int height): m_title(std::move(cs)), m_running(true), Rectangle(glm::vec2(0, 0), glm::vec2(width, height)) { }
+	Application::Application(std::string cs, int width, int height): m_title(std::move(cs)), m_running(true), Rectangle(0, 0, width, height) { }
 
 	void Application::init() {
 		m_window = set_window();
@@ -38,7 +38,7 @@ namespace liff {
 	}
 
 	bool Application::on_window_resize(WindowResizeEvent& e) {
-		set_size(glm::vec2(e.get_width(), e.get_height()));
+		set_size(e.get_width(), e.get_height());
 		glViewport(0, 0, e.get_width(), e.get_height());
 		std::cout << "window resized: " << e.get_height() << "  " << e.get_width() << std::endl;
 		return  true;
