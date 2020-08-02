@@ -7,12 +7,14 @@ namespace liff {
 
 	Application::Application(std::string cs): m_title(std::move(cs)), m_running(true) { }
 
-	void Application::run() {
+	void Application::init() {
 		m_window = set_window();
 		m_window->init();
 		m_renderFrame = set_render_frame();
 		m_renderFrame->init();
-		
+	}
+
+	void Application::run() {
 		on_start();
 		setup();
 

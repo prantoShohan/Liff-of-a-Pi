@@ -42,7 +42,6 @@ namespace liff {
 		virtual void push_layer(const std::shared_ptr<RenderFrame>& layer) {
 			m_stack.push_back(layer);
 			layer->init();
-			
 		};
 		
 		virtual std::vector<std::shared_ptr<RenderFrame>>::iterator begin() {

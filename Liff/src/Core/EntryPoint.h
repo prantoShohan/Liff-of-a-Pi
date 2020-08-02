@@ -6,5 +6,9 @@ extern liff::Application* liff::create_application();
 
 int main() {
 	auto app = liff::create_application();
+	
+	app->init();
 	app->run();
+
+	delete app;
 }

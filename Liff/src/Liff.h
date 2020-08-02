@@ -1,7 +1,9 @@
 #pragma once
 
-#include "EntryPoint.h"
-#include "Application.h"
-#include "Window.h"
-#include "Event.h"
-#include "RenderFrame.h"
+#include "Core/EntryPoint.h"
+#include "Core/Application.h"
+#include "Core/Window.h"
+#include "Core/Event.h"
+#include "Core/RenderFrame.h"
+
+

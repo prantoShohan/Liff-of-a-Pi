@@ -17,6 +17,8 @@ namespace liff {
 		
 	public:
 		explicit Application(std::string cs);
+		void init();
+
 
 		virtual ~Application() = default;
 		
