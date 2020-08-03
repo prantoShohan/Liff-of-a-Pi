@@ -227,14 +227,17 @@ public:
 		
         auto frame1 = std::make_shared<TestLayer>(this);
         auto frame2 = std::make_shared<TestLayer2>(this);
+        auto frame3 = std::make_shared<TestLayer2>(this);
 
         // auto stack = std::make_shared<liff::LayerStack>(this);
         // stack->push_layer(frame1);
         // stack->push_layer(frame2);
 
-        auto layout = std::make_shared<liff::RenderFrameLayout>(this, frame1, frame2, .5, false);
+        auto layout = std::make_shared<liff::RenderFrameLayout>(this, frame1, frame2, .5, true);
+		//auto layout2 = std::make_shared<liff::RenderFrameLayout>(this, frame1, frame2, .5, false);
+        auto layoutm = std::make_shared<liff::RenderFrameLayout>(this, layout, frame3, .5, false);
 		
-        return layout;
+        return layoutm;
 	};
 private:
 	void do_something() override {

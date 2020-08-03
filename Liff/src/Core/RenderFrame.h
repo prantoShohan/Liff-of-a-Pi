@@ -113,8 +113,11 @@ namespace liff {
 		}
 
 		void on_event(liff::Event& e) override {
+			RenderFrame::on_event(e);
 			EventDispatcher dispatcher(e);
 			dispatcher.dispatch<WindowResizeEvent>(std::bind(&RenderFrameLayout::on_resize, this, std::placeholders::_1));
+			m_frame1->on_event(e);
+			m_frame2->on_event(e);
 		};
 		
 		void render() override {
@@ -124,27 +127,29 @@ namespace liff {
 		
 	private:
 		bool on_resize(Event& e) {
-			RenderFrame::on_event(e);
 			adjust_rect();
-			m_frame1->on_event(e);
-			m_frame2->on_event(e);
 			return true;
 		}
 
 		void adjust_rect() {
 
 			if (m_vertical) {
-				m_rect1.set_position(this->get_pos_x(), this->get_pos_y());
-				m_rect1.set_size(this->get_size_x(), (this->get_size_y() - this->get_pos_y()) * m_ratio);
 
-				m_rect2.set_position(this->get_pos_x(), (this->get_size_y() - this->get_pos_y()) * m_ratio);
+				int x_offset = (this->get_size_x() - this->get_pos_x()) * m_ratio;
+				
+				m_rect1.set_position(this->get_pos_x(), this->get_pos_y());
+				m_rect1.set_size(x_offset, this->get_size_y());
+
+				m_rect2.set_position(x_offset, this->get_pos_y());
 				m_rect2.set_size(this->get_size_x(), this->get_size_y());
 			}
 			else {
+				int y_offset = (this->get_size_y() - this->get_pos_y()) / 2;
+				
 				m_rect1.set_position(this->get_pos_x(), this->get_pos_y());
-				m_rect1.set_size((this->get_size_x() - this->get_pos_x()) * m_ratio, this->get_size_y());
+				m_rect1.set_size(this->get_size_x(), y_offset);
 
-				m_rect2.set_position((this->get_size_x() - this->get_pos_x()) * m_ratio, this->get_pos_y());
+				m_rect2.set_position(this->get_pos_x(), y_offset);
 				m_rect2.set_size(this->get_size_x(), this->get_size_y());
 			}
 		}
