@@ -79,6 +79,12 @@ public:
 
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
         glEnableVertexAttribArray(0);
+// 		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)3);
+// 		glEnableVertexAttribArray(1);
+// 		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)0);
+// 		glEnableVertexAttribArray(2);
+// 		glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)0);
+// 		glEnableVertexAttribArray(3);
 
         // note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
         glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -120,6 +126,13 @@ public:
 private:
 	void do_something() override {
 		std::cout << "Testing the liff\n";
+//         liff::Quad q(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(3.0f, 3.0f, 3.0f), glm::vec4(.5f, .2f, .1f, 1.0f));
+// 		liff::Quad p(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(3.0f, 3.0f, 3.0f), glm::vec4(.5f, .2f, .1f, 1.0f));
+//         liff::Quad r(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(3.0f, 3.0f, 3.0f), glm::vec4(.5f, .2f, .1f, 1.0f));
+//         auto b = p.get_buffer_data() + q.get_buffer_data() + r.get_buffer_data();
+        liff::Rectangle r1({ 0, 0 }, { 100, 100 }, { .5, .2, .1, 1 });
+        liff::Rectangle r2({ 100, 100 }, { 200, 200 }, { .5, .2, .1, 1 });
+		std::cout << (r1.get_buffer_data()+r2.get_buffer_data()).to_string();
 	}
 
 };

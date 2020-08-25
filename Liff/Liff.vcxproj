@@ -100,17 +100,21 @@
     <ClInclude Include="src\Core\Event.h" />
     <ClInclude Include="src\Core\Interfaces.h" />
     <ClInclude Include="src\Core\RenderFrame.h" />
-    <ClInclude Include="src\Liff.h" />
-    <ClInclude Include="src\Core\liffpch.h" />
     <ClInclude Include="src\Core\Window.h" />
+    <ClInclude Include="src\Liff.h" />
+    <ClInclude Include="src\Shapes\Shapes.h" />
+    <ClInclude Include="src\Rendering\VertexArray.h" />
+    <ClInclude Include="src\liffpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\Application.cpp" />
     <ClCompile Include="src\Core\Event.cpp" />
-    <ClCompile Include="src\Core\liffpch.cpp">
+    <ClCompile Include="src\Core\Window.cpp" />
+    <ClCompile Include="src\Shapes\Shapes.cpp" />
+    <ClCompile Include="src\Rendering\VertexArray.cpp" />
+    <ClCompile Include="src\liffpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\Core\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\external\GLFW.vcxproj">
