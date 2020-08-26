@@ -1,28 +1,67 @@
 #include <iostream>
 
 #include "Liff.h"
+#include "Rendering/VertexArray.h"
 
 class TestLayer : public liff::RenderFrame {
 private:
 	bool sdw;
     unsigned int VAO;
     unsigned int shaderProgram;
+    liff::VertexArray va;
 public:
 	void init() override {
 		sdw = true;
         const char* vertexShaderSource = "#version 330 core\n"
             "layout (location = 0) in vec3 aPos;\n"
+            "layout(location = 1) in vec4 aColor;\n"
+            "layout(location = 2) in vec2 aTexCoord;\n"
+            "layout(location = 3) in float aTexInd;\n"
+            "out vec4 Color;\n"
             "void main()\n"
             "{\n"
             "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+            "	Color = aColor;"
             "}\0";
         const char* fragmentShaderSource = "#version 330 core\n"
             "out vec4 FragColor;\n"
+            "in vec4 Color;"
             "void main()\n"
             "{\n"
-            "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+            "   FragColor = Color;\n"
             "}\n\0";
 
+// 		"#version 330 core\n"
+// 			"out vec4 FragColor;"
+// 			""
+// 			"in vec4 Color;"
+// 			""
+// 			""
+// 			"void main()"
+// 			"{"
+// 			"	FragColor = Color;"
+// 			"}",
+// 
+// 
+// 			"#version 330 core\n"
+// 			"layout(location = 0) in vec3 aPos;"
+// 			"layout(location = 1) in vec4 aColor;"
+// 			"layout(location = 2) in vec2 aTexCoord;"
+// 			"layout(location = 3) in float aTexInd;"
+// 			""
+// 			"out vec4 Color;"
+// 			""
+// 			"uniform mat4 model;"
+// 			"uniform mat4 view;"
+// 			"uniform mat4 projection;"
+// 			""
+// 			"void main()"
+// 			"{"
+// 			"	gl_Position = projection * vec4(aPos, 1.0f);"
+// 			"	Color = aColor;"
+// 			"}"
+
+		
         int vertexShader = glCreateShader(GL_VERTEX_SHADER);
         glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
         glCompileShader(vertexShader);
@@ -60,43 +99,17 @@ public:
         glDeleteShader(vertexShader);
         glDeleteShader(fragmentShader);
 
-        // set up vertex data (and buffer(s)) and configure vertex attributes
-        // ------------------------------------------------------------------
-        float vertices[] = {
-            -0.5f, -0.5f, 0.0f, // left  
-             0.5f, -0.5f, 0.0f, // right 
-             0.0f,  0.5f, 0.0f  // top   
-        };
+        liff::Rectangle r({ .25, .25 }, { .75, .75 }, { .1, .2, .5, 1.0f });
+        liff::Rectangle s({ -.25, -.25 }, { 0, 0 }, { .1, .1, .7, 1.0});
+        auto d = r.get_buffer_data()+s.get_buffer_data();
 
-        unsigned int VBO;
-        glGenVertexArrays(1, &VAO);
-        glGenBuffers(1, &VBO);
-        // bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
-        glBindVertexArray(VAO);
-
-        glBindBuffer(GL_ARRAY_BUFFER, VBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-        glEnableVertexAttribArray(0);
-// 		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)3);
-// 		glEnableVertexAttribArray(1);
-// 		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)0);
-// 		glEnableVertexAttribArray(2);
-// 		glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)0);
-// 		glEnableVertexAttribArray(3);
-
-        // note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-        // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
-        // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
-        glBindVertexArray(0);
-
+        va = liff::VertexArray(d);
 
         // uncomment this call to draw in wireframe polygons.
         //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	};
+
+	
 	void render() override {
 		if(sdw) {
 			ImGui::ShowDemoWindow(&sdw);
@@ -105,8 +118,9 @@ public:
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
         glUseProgram(shaderProgram);
-        glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        //glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+        va.bind();
+        glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
 	};
 	void destroy() override{};
 };
@@ -132,7 +146,7 @@ private:
 //         auto b = p.get_buffer_data() + q.get_buffer_data() + r.get_buffer_data();
         liff::Rectangle r1({ 0, 0 }, { 100, 100 }, { .5, .2, .1, 1 });
         liff::Rectangle r2({ 100, 100 }, { 200, 200 }, { .5, .2, .1, 1 });
-		std::cout << (r1.get_buffer_data()+r2.get_buffer_data()).to_string();
+		//std::cout << (r1.get_buffer_data()+r2.get_buffer_data()).to_string();
 	}
 
 };

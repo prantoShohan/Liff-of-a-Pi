@@ -31,7 +31,7 @@ namespace liff {
 	
 	class BufferData {
 	private:
-		unsigned int lastIndex = 0;
+		unsigned int lastIndex;
 	public:
 		std::vector<float> vertexBuffer;
 		std::vector<unsigned int> indexBuffer;
@@ -40,8 +40,8 @@ namespace liff {
 			:vertexBuffer(vb), indexBuffer(ib), lastIndex(li) {}
 		
 		BufferData operator + (BufferData const& data) {
-			auto vb = vertexBuffer;
-			auto ib = indexBuffer;
+			std::vector<float> vb = vertexBuffer;
+			std::vector<unsigned int> ib = indexBuffer;
 			vb.insert(vb.end(), data.vertexBuffer.begin(), data.vertexBuffer.end());
 			std::vector<unsigned int> ind;
 			for(auto i: data.indexBuffer) {
@@ -52,7 +52,7 @@ namespace liff {
 			return BufferData(vb, ib, lastIndexForthis);
 		}
 
-		std::string to_string() {
+		std::string to_string() const{
 			std::string s = "VertexBuffer: \n";
 			for (int i = 0; i < vertexBuffer.size(); i++) {
 				if(i%10 == 0) {
