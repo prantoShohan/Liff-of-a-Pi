@@ -103,6 +103,7 @@
     <ClInclude Include="src\Core\Window.h" />
     <ClInclude Include="src\Liff.h" />
     <ClInclude Include="src\Rendering\Shader.h" />
+    <ClInclude Include="src\Rendering\ShaderLibrery.h" />
     <ClInclude Include="src\Shapes\Shapes.h" />
     <ClInclude Include="src\Rendering\VertexArray.h" />
     <ClInclude Include="src\liffpch.h" />
@@ -112,6 +113,7 @@
     <ClCompile Include="src\Core\Event.cpp" />
     <ClCompile Include="src\Core\Window.cpp" />
     <ClCompile Include="src\Rendering\Shader.cpp" />
+    <ClCompile Include="src\Rendering\ShaderLibrery.cpp" />
     <ClCompile Include="src\Shapes\Shapes.cpp" />
     <ClCompile Include="src\Rendering\VertexArray.cpp" />
     <ClCompile Include="src\liffpch.cpp">

@@ -115,8 +115,6 @@ namespace liff {
 			}
 			return location;
 		}
-
-		
 	};
 
 }

@@ -11,6 +11,7 @@ private:
     unsigned int shaderProgram;
     liff::VertexArray va;
     liff::Shader shader;
+	
 public:
 	void init() override {
 		sdw = true;
@@ -63,8 +64,6 @@ public:
 
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
-        //glUseProgram(shaderProgram);
-        //glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
         shader.bind();
         va.bind();
         glDrawElements(GL_TRIANGLES, 18, GL_UNSIGNED_INT, 0);

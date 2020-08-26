@@ -32,6 +32,7 @@
     <ClInclude Include="src\Rendering\VertexArray.h" />
     <ClInclude Include="src\Shapes\Shapes.h" />
     <ClInclude Include="src\Rendering\Shader.h" />
+    <ClInclude Include="src\Rendering\ShaderLibrery.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\Application.cpp">
@@ -47,5 +48,6 @@
     <ClCompile Include="src\Rendering\VertexArray.cpp" />
     <ClCompile Include="src\Shapes\Shapes.cpp" />
     <ClCompile Include="src\Rendering\Shader.cpp" />
+    <ClCompile Include="src\Rendering\ShaderLibrery.cpp" />
   </ItemGroup>
 </Project>
