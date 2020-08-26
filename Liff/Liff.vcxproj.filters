@@ -31,6 +31,7 @@
     <ClInclude Include="src\liffpch.h" />
     <ClInclude Include="src\Rendering\VertexArray.h" />
     <ClInclude Include="src\Shapes\Shapes.h" />
+    <ClInclude Include="src\Rendering\Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\Application.cpp">
@@ -45,5 +46,6 @@
     <ClCompile Include="src\liffpch.cpp" />
     <ClCompile Include="src\Rendering\VertexArray.cpp" />
     <ClCompile Include="src\Shapes\Shapes.cpp" />
+    <ClCompile Include="src\Rendering\Shader.cpp" />
   </ItemGroup>
 </Project>
