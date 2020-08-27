@@ -13,14 +13,14 @@ namespace liff {
 		unsigned int rendererID;
 		unsigned int vbo;
 		unsigned int ebo;
-		
+
 	public:
 		VertexArray() {}
 		VertexArray(const BufferData& data) {
 			glGenVertexArrays(1, &rendererID);
 			glGenBuffers(1, &vbo);
 			glGenBuffers(1, &ebo);
-			
+
 			glBindVertexArray(rendererID);
 
 			glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -45,11 +45,15 @@ namespace liff {
 			glBindVertexArray(0);
 
 			//std::cout << data.to_string()<<std::endl<<rendererID<< std::endl;
-			
+
 		}
 
 		void bind() {
 			glBindVertexArray(rendererID);
+		}
+
+		void deleteVAO() {
+			glDeleteVertexArrays(1, &rendererID);
 		}
 	};
 }

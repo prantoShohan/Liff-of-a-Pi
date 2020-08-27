@@ -1,7 +1,10 @@
 #include <iostream>
 
 #include "Liff.h"
+#include "Rendering/Camera.h"
+#include "Rendering/Renderer.h"
 #include "Rendering/Shader.h"
+#include "Rendering/ShaderLibrery.h"
 #include "Rendering/VertexArray.h"
 
 class TestLayer : public liff::RenderFrame {
@@ -26,10 +29,11 @@ public:
 			"uniform mat4 model;"
 			"uniform mat4 view;"
 			"uniform mat4 projection;"
+			"uniform mat4 viewProjection;"
 			""
             "void main()\n"
             "{\n"
-            "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+            "   gl_Position = viewProjection * vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
             "	Color = aColor;"
             "}\0";
         std::string fragmentShaderSource = 
@@ -41,16 +45,19 @@ public:
             "   FragColor = Color;\n"
             "}\n\0";
 
-        shader = liff::Shader(fragmentShaderSource, vertexShaderSource);
+        liff::ShaderLibrary::get().createShader("basic", vertexShaderSource, fragmentShaderSource);
+        liff::ShaderLibrary::get().createShader("bc", vertexShaderSource, fragmentShaderSource);
 
-        liff::Rectangle r({ .25, .25 }, { .75, .75 }, { .1, .2, .5, 1.0f });
-        liff::Rectangle s({ -.25, -.25 }, { 0, 0 }, { .1, .1, .7, 1.0});
-        liff::Rectangle t({ -.75, -.75 }, { -.25, -.25 }, { .1, .1, .7, 1.0 });
-        auto d = r.get_buffer_data()+s.get_buffer_data()+t.get_buffer_data();
+        liff::Rectangle r({ 0, 0 }, { 100, 100 }, { .1, .2, .5, 1.0f });
+        liff::Rectangle s({ 50, 50 }, { 200, 200 }, { .3, .1, .7, 1.0});
+        liff::Rectangle t({ 300, 300 }, { 500, 600 }, { .1, .9, .7, 1.0 });
+        auto d = r.get_buffer_data()+s.get_buffer_data();
 
-        std::cout << d.to_string();
+        liff::Renderer::get().submit(liff::DrawCall(r.get_buffer_data(), "basic"));
+        liff::Renderer::get().submit(liff::DrawCall(s.get_buffer_data(), "bc"));
+        liff::Renderer::get().submit(liff::DrawCall(t.get_buffer_data(), "basic"));
 
-        va = liff::VertexArray(d);
+        liff::Renderer::get().set_camera(std::make_shared<liff::Camera2d>(0, 1280, 0, 720));
 
         // uncomment this call to draw in wireframe polygons.
         //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -64,9 +71,7 @@ public:
 
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
-        shader.bind();
-        va.bind();
-        glDrawElements(GL_TRIANGLES, 18, GL_UNSIGNED_INT, 0);
+        liff::Renderer::get().render();
 	};
 	void destroy() override{};
 };
@@ -86,9 +91,6 @@ public:
 private:
 	void do_something() override {
 		std::cout << "Testing the liff\n";
-        liff::Rectangle r1({ 0, 0 }, { 100, 100 }, { .5, .2, .1, 1 });
-        liff::Rectangle r2({ 100, 100 }, { 200, 200 }, { .5, .2, .1, 1 });
-		//std::cout << (r1.get_buffer_data()+r2.get_buffer_data()).to_string();
 	}
 
 };

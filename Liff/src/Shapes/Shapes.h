@@ -36,6 +36,8 @@ namespace liff {
 		std::vector<float> vertexBuffer;
 		std::vector<unsigned int> indexBuffer;
 
+		BufferData(){}
+		
 		BufferData(const std::vector<float>& vb, const std::vector<unsigned int> ib, int li = 0)
 			:vertexBuffer(vb), indexBuffer(ib), lastIndex(li) {}
 		

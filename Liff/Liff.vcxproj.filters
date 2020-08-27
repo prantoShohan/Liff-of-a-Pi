@@ -33,6 +33,8 @@
     <ClInclude Include="src\Shapes\Shapes.h" />
     <ClInclude Include="src\Rendering\Shader.h" />
     <ClInclude Include="src\Rendering\ShaderLibrery.h" />
+    <ClInclude Include="src\Rendering\Renderer.h" />
+    <ClInclude Include="src\Rendering\Camera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\Application.cpp">
@@ -49,5 +51,7 @@
     <ClCompile Include="src\Shapes\Shapes.cpp" />
     <ClCompile Include="src\Rendering\Shader.cpp" />
     <ClCompile Include="src\Rendering\ShaderLibrery.cpp" />
+    <ClCompile Include="src\Rendering\Renderer.cpp" />
+    <ClCompile Include="src\Rendering\Camera.cpp" />
   </ItemGroup>
 </Project>

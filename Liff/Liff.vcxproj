@@ -102,6 +102,8 @@
     <ClInclude Include="src\Core\RenderFrame.h" />
     <ClInclude Include="src\Core\Window.h" />
     <ClInclude Include="src\Liff.h" />
+    <ClInclude Include="src\Rendering\Camera.h" />
+    <ClInclude Include="src\Rendering\Renderer.h" />
     <ClInclude Include="src\Rendering\Shader.h" />
     <ClInclude Include="src\Rendering\ShaderLibrery.h" />
     <ClInclude Include="src\Shapes\Shapes.h" />
@@ -112,6 +114,8 @@
     <ClCompile Include="src\Core\Application.cpp" />
     <ClCompile Include="src\Core\Event.cpp" />
     <ClCompile Include="src\Core\Window.cpp" />
+    <ClCompile Include="src\Rendering\Camera.cpp" />
+    <ClCompile Include="src\Rendering\Renderer.cpp" />
     <ClCompile Include="src\Rendering\Shader.cpp" />
     <ClCompile Include="src\Rendering\ShaderLibrery.cpp" />
     <ClCompile Include="src\Shapes\Shapes.cpp" />

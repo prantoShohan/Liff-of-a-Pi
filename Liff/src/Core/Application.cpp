@@ -3,6 +3,8 @@
 
 #include <utility>
 
+#include "Rendering/Renderer.h"
+
 namespace liff {
 
 	Application::Application(std::string cs): m_title(std::move(cs)), m_running(true) { }
@@ -53,6 +55,7 @@ namespace liff {
 		EventDispatcher dispatcher(e);
 		dispatcher.dispatch<WindowResizeEvent>(std::bind(&Application::on_window_resize, this, std::placeholders::_1));
 		dispatcher.dispatch<WindowCloseEvent>(std::bind(&Application::on_window_close, this, std::placeholders::_1));
+		Renderer::get().on_event(e);
 		m_renderFrame->on_event(e);
 	}
 }

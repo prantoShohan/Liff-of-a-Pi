@@ -51,6 +51,10 @@ namespace liff {
 		void set_projection_matrix(glm::mat4 projection) {
 			glUniformMatrix4fv(uniform_location("projection"), 1, GL_FALSE, glm::value_ptr(projection));
 		};
+		
+		void set_view_projection_matrix(glm::mat4 mat) {
+			glUniformMatrix4fv(uniform_location("viewProjection"), 1, GL_FALSE, glm::value_ptr(mat));
+		};
 
 		int uniform_location(std::string name) {
 			if (uniforms.find(name) != uniforms.end())

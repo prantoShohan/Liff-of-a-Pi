@@ -26,6 +26,7 @@ namespace liff {
 
 		void on_event(liff::Event& e) override {}
 	};
+
 	
 	class LayerStack final : public RenderFrame {
 	private:
