@@ -23,7 +23,7 @@ namespace liff {
 		glm::mat4 view;
 		glm::mat4 viewProjection;
 
-		glm::vec3 position = {0, 0, 0};
+		glm::vec3 position = {0.0f, 0.0f, 0.0f};
 		float rotation = 0;
 
 		void on_update() {
@@ -53,4 +53,5 @@ namespace liff {
 
 		void on_event(liff::Event& e) override {};
 	};
+
 }

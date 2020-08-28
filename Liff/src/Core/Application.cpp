@@ -40,7 +40,7 @@ namespace liff {
 	}
 
 	bool Application::on_window_resize(WindowResizeEvent& e) {
-		glViewport(0, 0, e.get_width(), e.get_width());
+		glViewport(0, 0, e.get_width(), e.get_height());
 		std::cout << "window resized: " << e.get_height() << "  " << e.get_width() << std::endl;
 		return  true;
 	}

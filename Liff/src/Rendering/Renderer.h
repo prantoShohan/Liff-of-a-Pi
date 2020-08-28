@@ -56,6 +56,7 @@ namespace liff {
 		void render() {
 			for (auto const& drawCall : drawList) {
 				ShaderLibrary::get().get_shader_instance(drawCall.first).bind();
+				//TODO note glm::ortho must take float value. int gets wrong results
 				ShaderLibrary::get().get_shader_instance(drawCall.first).set_view_projection_matrix(camera->get_viewProjection());
 				auto vao = VertexArray(drawCall.second.buffer);
 				vao.bind();
