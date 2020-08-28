@@ -34,6 +34,7 @@ namespace liff {
 		virtual void update();
 		virtual bool on_window_resize(WindowResizeEvent& e);
 		virtual bool on_window_close(WindowCloseEvent& e);
+		virtual bool on_key_pressed(KeyPressedEvent& e);
 
 		virtual void on_event(Event& e) override;
 	};

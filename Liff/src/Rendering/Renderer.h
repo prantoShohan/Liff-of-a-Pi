@@ -71,15 +71,8 @@ namespace liff {
 			camera = cam;
 		}
 
-		bool update_camera(WindowResizeEvent& e) {
-			//TODO camera can recieve the event and set projection matrix locally
-			camera->set_projection(0.0f, (float)e.get_width(), 0.0f, (float)e.get_height());
-			return true;
-		}
-
 		void on_event(liff::Event& e) override {
-			EventDispatcher dispatcher(e);
-			dispatcher.dispatch<WindowResizeEvent>(std::bind(&Renderer::update_camera, this, std::placeholders::_1));
+			camera->on_event(e);
 		};
 	private:
 		Renderer(){}

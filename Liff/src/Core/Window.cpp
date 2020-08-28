@@ -36,6 +36,14 @@ namespace liff {
 			EventListener* listener = (EventListener*)glfwGetWindowUserPointer(window);
 			listener->on_event(e);
 		});
+
+		glfwSetKeyCallback(m_window, [](GLFWwindow * window, int key, int scancode, int action, int mods){
+			if(action == GLFW_PRESS) {
+				auto e = KeyPressedEvent(key);
+				EventListener* listener = (EventListener*)glfwGetWindowUserPointer(window);
+				listener->on_event(e);
+			}
+		});
 		
 		//TODO: this should be in another class
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){

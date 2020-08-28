@@ -50,11 +50,17 @@ namespace liff {
 		std::cout << "Window close\n";
 		return true;
 	}
+
+	bool Application::on_key_pressed(KeyPressedEvent& e) {
+		std::cout << e.get_key() << std::endl;
+		return true;
+	}
 	
 	void Application::on_event(Event& e) {
 		EventDispatcher dispatcher(e);
 		dispatcher.dispatch<WindowResizeEvent>(std::bind(&Application::on_window_resize, this, std::placeholders::_1));
 		dispatcher.dispatch<WindowCloseEvent>(std::bind(&Application::on_window_close, this, std::placeholders::_1));
+		dispatcher.dispatch<KeyPressedEvent>(std::bind(&Application::on_key_pressed, this, std::placeholders::_1));
 		Renderer::get().on_event(e);
 		m_renderFrame->on_event(e);
 	}

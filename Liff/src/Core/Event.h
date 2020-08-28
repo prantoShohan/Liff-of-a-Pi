@@ -6,12 +6,14 @@
 namespace liff {
 	enum class EventType {
 		None = 0,
-		WindowResizeEvent, WindowCloseEvent
+		WindowResizeEvent, WindowCloseEvent,
+		KeyPressedEvent
 	};
 
 	enum EventCategory {
 		None = 0,
-		WindowEventCategory = 1 << 0
+		WindowEventCategory = 1 << 0,
+		KeyEventCategory = 1 << 1
 	};
 	
 	class Event {
@@ -67,5 +69,18 @@ namespace liff {
 		EventType get_type() override { return EventType::WindowCloseEvent; };
 		EventCategory get_category() override { return EventCategory::WindowEventCategory; };
 		static EventType get_static_type() { return EventType::WindowCloseEvent; }
+	};
+
+	class KeyPressedEvent: public Event {
+		int key;
+
+	public:
+		KeyPressedEvent(int k): key(k){}
+		
+		EventType get_type() override { return EventType::KeyPressedEvent; }
+		EventCategory get_category() override { return EventCategory::KeyEventCategory; }
+		static EventType get_static_type() { return EventType::KeyPressedEvent; }
+
+		int get_key() { return key; };
 	};
 }

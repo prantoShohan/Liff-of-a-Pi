@@ -57,7 +57,7 @@ public:
         liff::Renderer::get().submit(liff::DrawCall(s.get_buffer_data(), "bc"));
         liff::Renderer::get().submit(liff::DrawCall(t.get_buffer_data(), "basic"));
 
-        liff::Renderer::get().set_camera(std::make_shared<liff::Camera2d>(0, 1280, 0, 720));
+        liff::Renderer::get().set_camera(std::make_shared<liff::PlayerCam2d>(0, 1280, 0, 720));
 
         // uncomment this call to draw in wireframe polygons.
         //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
