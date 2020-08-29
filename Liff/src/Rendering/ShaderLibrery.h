@@ -7,7 +7,7 @@ namespace liff {
 	
 	class ShaderLibrary {
 	private:
-		std::unordered_map<std::string, Shader> library;
+		std::unordered_map<std::string, std::shared_ptr<Shader>> library;
 		ShaderLibrary(){}
 		
 	public:
@@ -19,10 +19,10 @@ namespace liff {
 		}
 		
 		void createShader(std::string name, std::string vs, std::string fs) {
-			library[name] = Shader(fs, vs);
+			library[name] = std::make_shared<Shader>(fs, vs);
 		}
 
-		Shader& get_shader_instance(std::string name) {
+		std::shared_ptr<Shader> get_shader_instance(std::string name) {
 			return library[name];
 		}
 		

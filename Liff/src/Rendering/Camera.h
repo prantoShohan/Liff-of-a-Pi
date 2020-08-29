@@ -74,7 +74,6 @@ namespace liff {
 
 		bool on_key_pressed(KeyPressedEvent& e) {
 			if(e.get_key() == GLFW_KEY_W) {
-				std::cout << "weeeeee!" << std::endl;
 				move_up();
 			}
 			else if (e.get_key() == GLFW_KEY_S) {

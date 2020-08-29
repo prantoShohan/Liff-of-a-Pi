@@ -14,8 +14,12 @@ private:
     unsigned int shaderProgram;
     liff::VertexArray va;
     liff::Shader shader;
+    liff::BufferData d;
+    liff::PlayerCam2d cam;
 	
 public:
+    TestLayer() : cam (liff::PlayerCam2d(0, 1280, 0, 720)){}
+	
 	void init() override {
 		sdw = true;
         std::string vertexShaderSource = 
@@ -51,13 +55,16 @@ public:
         liff::Rectangle r({ 0, 0 }, { 100, 100 }, { .1, .2, .5, 1.0f });
         liff::Rectangle s({ 50, 50 }, { 200, 200 }, { .3, .1, .7, 1.0});
         liff::Rectangle t({ 300, 300 }, { 500, 600 }, { .1, .9, .7, 1.0 });
-        auto d = r.get_buffer_data()+s.get_buffer_data();
+        d = r.get_buffer_data()+s.get_buffer_data()+t.get_buffer_data();
+        va = liff::VertexArray(3);
+        std::cout << d.indexBuffer.size() << " " << d.vertexBuffer.size() << std::endl << d.to_string();
+    	
+//         liff::Renderer::get().submit(liff::DrawCall(r.get_buffer_data(), "basic"));
+//         liff::Renderer::get().submit(liff::DrawCall(s.get_buffer_data(), "bc"));
+//         liff::Renderer::get().submit(liff::DrawCall(t.get_buffer_data(), "basic"));
 
-        liff::Renderer::get().submit(liff::DrawCall(r.get_buffer_data(), "basic"));
-        liff::Renderer::get().submit(liff::DrawCall(s.get_buffer_data(), "bc"));
-        liff::Renderer::get().submit(liff::DrawCall(t.get_buffer_data(), "basic"));
-
-        liff::Renderer::get().set_camera(std::make_shared<liff::PlayerCam2d>(0, 1280, 0, 720));
+        //liff::Renderer::get().set_camera(std::make_shared<liff::PlayerCam2d>(0, 1280, 0, 720));
+        
 
         // uncomment this call to draw in wireframe polygons.
         //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -70,10 +77,20 @@ public:
 		}
 
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		
+        liff::ShaderLibrary::get().get_shader_instance("basic")->bind();
+		liff::ShaderLibrary::get().get_shader_instance("basic")->set_view_projection_matrix(cam.get_viewProjection());
+        va.bind();
+        va.submit_data(d);
 
-        liff::Renderer::get().render();
+        glDrawElements(GL_TRIANGLES, va.get_size(), GL_UNSIGNED_INT, 0);
+		
+        //liff::Renderer::get().render();
 	};
 	void destroy() override{};
+
+    void on_event(liff::Event& e) { cam.on_event(e);
+    	}
 };
 
 class TestApplication: public liff::Application {
