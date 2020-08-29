@@ -13,11 +13,14 @@ namespace liff {
 	public:
 		RenderFrame() :m_renderFrame(nullptr) {}
 
-		virtual void init() {};
+		virtual void init() {}
 
-		virtual void destroy() {};
+		virtual void destroy() {}
+
+		virtual void on_update() {}
 
 		virtual void update() final {
+			on_update();
 			if (m_renderFrame) {
 				m_renderFrame->update();
 			}

@@ -1,4 +1,6 @@
 #include <iostream>
+#include <memory>
+
 
 #include "Liff.h"
 #include "Rendering/Camera.h"
@@ -10,15 +12,10 @@
 class TestLayer : public liff::RenderFrame {
 private:
 	bool sdw;
-    unsigned int VAO;
-    unsigned int shaderProgram;
-    liff::VertexArray va;
-    liff::Shader shader;
-    liff::BufferData d;
-    liff::PlayerCam2d cam;
+
 	
 public:
-    TestLayer() : cam (liff::PlayerCam2d(0, 1280, 0, 720)){}
+    TestLayer(){}
 	
 	void init() override {
 		sdw = true;
@@ -52,23 +49,23 @@ public:
         liff::ShaderLibrary::get().createShader("basic", vertexShaderSource, fragmentShaderSource);
         liff::ShaderLibrary::get().createShader("bc", vertexShaderSource, fragmentShaderSource);
 
-        liff::Rectangle r({ 0, 0 }, { 100, 100 }, { .1, .2, .5, 1.0f });
-        liff::Rectangle s({ 50, 50 }, { 200, 200 }, { .3, .1, .7, 1.0});
-        liff::Rectangle t({ 300, 300 }, { 500, 600 }, { .1, .9, .7, 1.0 });
-        d = r.get_buffer_data()+s.get_buffer_data()+t.get_buffer_data();
-        va = liff::VertexArray(3);
-        std::cout << d.indexBuffer.size() << " " << d.vertexBuffer.size() << std::endl << d.to_string();
-    	
-//         liff::Renderer::get().submit(liff::DrawCall(r.get_buffer_data(), "basic"));
-//         liff::Renderer::get().submit(liff::DrawCall(s.get_buffer_data(), "bc"));
-//         liff::Renderer::get().submit(liff::DrawCall(t.get_buffer_data(), "basic"));
 
-        //liff::Renderer::get().set_camera(std::make_shared<liff::PlayerCam2d>(0, 1280, 0, 720));
-        
+		liff::Renderer::get().initialize(std::make_shared<liff::PlayerCam2d>(0, 1280, 0, 720), std::make_shared<liff::SortedDrawCallManager>());
 
         // uncomment this call to draw in wireframe polygons.
         //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	};
+
+	void on_update() override {
+
+		liff::Renderer::get().submit(liff::DrawData(liff::Rectangle({ 0, 0 }, { 100, 100 }, { .1, .2, .5, 1.0f }).get_buffer_data(), "basic"));
+		liff::Renderer::get().submit(liff::DrawData(liff::Rectangle({ 50, 50 }, { 200, 200 }, { .3, .1, .7, 1.0 }).get_buffer_data(), "bc"));
+		liff::Renderer::get().submit(liff::DrawData(liff::Rectangle({ 100, 100 }, { 400, 400 }, { .1, .9, .7, 1.0 }).get_buffer_data(), "basic"));
+		liff::Renderer::get().submit(liff::DrawData(liff::Rectangle({ 200, 200 }, { 600, 600 }, { .7, .3, .7, 1.0 }).get_buffer_data(), "bc"));
+		liff::Renderer::get().submit(liff::DrawData(liff::Rectangle({ 500, 500 }, { 700, 700 }, { .1, .2, .5, 1.0f }).get_buffer_data(), "basic"));
+
+
+	}
 
 	
 	void render() override {
@@ -77,19 +74,38 @@ public:
 		}
 
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		
-        liff::ShaderLibrary::get().get_shader_instance("basic")->bind();
-		liff::ShaderLibrary::get().get_shader_instance("basic")->set_view_projection_matrix(cam.get_viewProjection());
-        va.bind();
-        va.submit_data(d);
+        liff::Renderer::get().render();
+// 		manager.submit(liff::DrawData(liff::Rectangle({ 0, 0 }, { 100, 100 }, { .1, .2, .5, 1.0f }).get_buffer_data(), "basic"));
+// 		manager.submit(liff::DrawData(liff::Rectangle({ 50, 50 }, { 200, 200 }, { .3, .1, .7, 1.0 }).get_buffer_data(), "bc"));
+// 		manager.submit(liff::DrawData(liff::Rectangle({ 100, 100 }, { 400, 400 }, { .1, .9, .7, 1.0 }).get_buffer_data(), "basic"));
+// 		manager.submit(liff::DrawData(liff::Rectangle({ 200, 200 }, { 600, 600 }, { .7, .3, .7, 1.0 }).get_buffer_data(), "bc"));
+// 		manager.draw_all(cam);
+// 		manager.flush();
+// 		
 
-        glDrawElements(GL_TRIANGLES, va.get_size(), GL_UNSIGNED_INT, 0);
+		
+        //glDrawElements(GL_TRIANGLES, va.get_size(), GL_UNSIGNED_INT, 0);
+//         call.prepare();
+// 		call.bind();
+// 		call.camera_update(cam);
+// 		call.call();
+				
+//         liff::Renderer::get().begin(std::make_shared<liff::PlayerCam2d>(0, 1280, 0, 720), std::make_shared<liff::UnsortedDrawCallManager>());
+//         liff::Renderer::get().submit(liff::DrawData(d, "basic"));
+//         liff::Renderer::get().end();
+		
+//         liff::ShaderLibrary::get().get_shader_instance("basic")->bind();
+// 		liff::ShaderLibrary::get().get_shader_instance("basic")->set_view_projection_matrix(cam->get_viewProjection());
+//         va.bind();
+//         va.submit_data(d);
+// 
+//         glDrawElements(GL_TRIANGLES, va.get_size(), GL_UNSIGNED_INT, 0);
 		
         //liff::Renderer::get().render();
 	};
 	void destroy() override{};
 
-    void on_event(liff::Event& e) { cam.on_event(e);
+    void on_event(liff::Event& e) {
     	}
 };
 
