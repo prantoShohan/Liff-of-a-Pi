@@ -7,6 +7,7 @@
 
 #include "Core/Interfaces.h"
 #include "Core/Event.h"
+#include "Core/Input.h"
 #include "glm/gtc/matrix_transform.hpp"
 
 namespace liff {
@@ -15,6 +16,8 @@ namespace liff {
 		virtual glm::mat4 get_view() = 0;
 		virtual glm::mat4 get_projection() = 0;
 		virtual glm::mat4 get_viewProjection() = 0;
+
+		virtual void update(){}
 
 		virtual void set_projection(float left, float right, float bottom, float top) = 0;
 	};
@@ -72,31 +75,28 @@ namespace liff {
 		void move_up() { camera.set_position(glm::vec3(camera.get_position().x, camera.get_position().y + velocity.y, camera.get_position().z)); };;
 		void move_down() { camera.set_position(glm::vec3(camera.get_position().x, camera.get_position().y - velocity.y, camera.get_position().z)); };
 
-		bool on_key_pressed(KeyPressedEvent& e) {
-			if(e.get_key() == GLFW_KEY_W) {
+		void update() override{
+			if(Input::is_key_pressed(GLFW_KEY_W)) {
 				move_up();
 			}
-			else if (e.get_key() == GLFW_KEY_S) {
+			else if (Input::is_key_pressed(GLFW_KEY_S)) {
 				move_down();
 			}
-			else if (e.get_key() == GLFW_KEY_A) {
+			else if (Input::is_key_pressed(GLFW_KEY_A)) {
 				move_left();
 			}
-			else if (e.get_key() == GLFW_KEY_D) {
+			else if (Input::is_key_pressed(GLFW_KEY_D)) {
 				move_right();
 			}
-			return true;
+
 		}
-		
+
+
 	public:
+		void on_event(liff::Event& e) override{};
+
 		PlayerCam2d(float left, float right, float bottom, float top)
 			:camera(left, right, bottom, top){}
-		
-		void on_event(liff::Event& e) override {
-			EventDispatcher dispatcher(e);
-			dispatcher.dispatch<KeyPressedEvent>(std::bind(&PlayerCam2d::on_key_pressed, this, std::placeholders::_1));
-			camera.on_event(e);
-		};
 		
 		glm::mat4 get_view() override { return camera.get_view(); }
 		glm::mat4 get_projection() override { return camera.get_projection(); }

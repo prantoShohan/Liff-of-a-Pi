@@ -36,7 +36,7 @@ namespace liff {
 	};
 
 	class DrawCall {
-	public:
+	private:
 		int max_quad_count = 500;
 		bool prepared = false;
 
@@ -177,12 +177,11 @@ namespace liff {
 		}
 
 		void initialize(std::shared_ptr<Camera> cam, std::shared_ptr<DrawCallManager> dm) { drawCallManager = dm; camera = cam; }
-
-		void end() {}
 		
 		void submit(const DrawData& data) { drawCallManager->submit(data); }
 
 		void render() {
+			camera->update();
 			drawCallManager->draw_all(camera);
 			drawCallManager->flush();
 		}

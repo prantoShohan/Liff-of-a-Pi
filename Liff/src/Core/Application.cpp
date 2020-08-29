@@ -14,6 +14,7 @@ namespace liff {
 		m_window->init();
 		m_renderFrame = set_render_frame();
 		m_renderFrame->init();
+		instance = this;
 	}
 
 	void Application::run() {
@@ -64,4 +65,6 @@ namespace liff {
 		Renderer::get().on_event(e);
 		m_renderFrame->on_event(e);
 	}
+
+	Application* Application::instance;
 }

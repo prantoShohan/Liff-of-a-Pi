@@ -13,9 +13,11 @@ namespace liff {
 		std::shared_ptr<Window> m_window;
 		bool m_running;
 		std::shared_ptr<RenderFrame> m_renderFrame;
-		
-		
+
+		static Application* instance;
 	public:
+		
+		
 		explicit Application(std::string cs);
 		void init();
 
@@ -37,6 +39,10 @@ namespace liff {
 		virtual bool on_key_pressed(KeyPressedEvent& e);
 
 		virtual void on_event(Event& e) override;
+
+		std::shared_ptr<Window> get_window() const { return m_window; }
+
+		static Application* get() { return instance; }
 	};
 
 	Application* create_application();
