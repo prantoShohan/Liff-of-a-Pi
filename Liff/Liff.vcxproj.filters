@@ -42,20 +42,9 @@
     <ClCompile Include="src\Core\Application.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\Core\Event.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="src\Core\Window.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="src\liffpch.cpp" />
-    <ClCompile Include="src\Rendering\VertexArray.cpp" />
-    <ClCompile Include="src\Shapes\Shapes.cpp" />
-    <ClCompile Include="src\Rendering\Shader.cpp" />
-    <ClCompile Include="src\Rendering\ShaderLibrery.cpp" />
-    <ClCompile Include="src\Rendering\Renderer.cpp" />
-    <ClCompile Include="src\Rendering\Camera.cpp" />
-    <ClCompile Include="src\Core\Input.cpp" />
-    <ClCompile Include="src\Shapes\View.cpp" />
   </ItemGroup>
 </Project>

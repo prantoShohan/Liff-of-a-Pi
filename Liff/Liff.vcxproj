@@ -114,19 +114,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\Application.cpp" />
-    <ClCompile Include="src\Core\Event.cpp" />
-    <ClCompile Include="src\Core\Input.cpp" />
     <ClCompile Include="src\Core\Window.cpp" />
-    <ClCompile Include="src\Rendering\Camera.cpp" />
-    <ClCompile Include="src\Rendering\Renderer.cpp" />
-    <ClCompile Include="src\Rendering\Shader.cpp" />
-    <ClCompile Include="src\Rendering\ShaderLibrery.cpp" />
-    <ClCompile Include="src\Shapes\Shapes.cpp" />
-    <ClCompile Include="src\Rendering\VertexArray.cpp" />
     <ClCompile Include="src\liffpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\Shapes\View.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\external\GLFW.vcxproj">

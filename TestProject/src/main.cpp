@@ -56,6 +56,9 @@ public:
 
 	void on_update() override {
 
+		auto p = liff::Input::get_mouse_position();
+		std::cout << p.x << " " << p.y << std::endl;
+
 		liff::Renderer::get().submit(liff::DrawData(liff::Rectangle({ 0, 0 }, { 100, 100 }, { .1, .2, .5, 1.0f }).get_buffer_data(), "basic"));
 		liff::Renderer::get().submit(liff::DrawData(liff::Rectangle({ 50, 50 }, { 200, 200 }, { .3, .1, .7, 1.0 }).get_buffer_data(), "basic"));
 		liff::Renderer::get().submit(liff::DrawData(liff::Rectangle({ 100, 100 }, { 400, 400 }, { .1, .9, .7, 1.0 }).get_buffer_data(), "basic"));

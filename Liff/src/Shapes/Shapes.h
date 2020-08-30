@@ -6,6 +6,8 @@
 #include "glm/vec3.hpp"
 #include "glm/vec4.hpp"
 
+#include "Rendering/Renderer.h"
+
 
 
 namespace liff {
@@ -89,7 +91,7 @@ namespace liff {
 		Vertex v2;
 		Vertex v3;
 		Vertex v4;	
-		glm::vec3 color;
+		glm::vec4 color;
 
 	public:
 		Quad(const glm::vec3& p1, const glm::vec3& p2, const glm::vec3& p3, const glm::vec3& p4, const glm::vec4& icolor)
@@ -110,6 +112,9 @@ namespace liff {
 			
 			return BufferData(vb1, { 0, 1, 2, 0, 2, 3 }, 3);
 		}
+
+		void set_color(glm::vec4 col) { color = col; }
+		glm::vec4 get_color() const { return color; }
 	};
 
 	class Rectangle : public Drawable {
@@ -125,5 +130,8 @@ namespace liff {
 		BufferData get_buffer_data() override {
 			return quad.get_buffer_data();
 		}
+
+		void set_color(glm::vec4 col) { quad.set_color(col); }
+		glm::vec4 get_color() const { return quad.get_color(); }
 	};
 }

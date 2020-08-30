@@ -70,10 +70,10 @@ namespace liff {
 		Camera2d camera;
 		glm::vec2 velocity = { 5.0f, 5.0f };
 
-		void move_right() { camera.set_position(glm::vec3(camera.get_position().x + velocity.x, camera.get_position().y, camera.get_position().z)); };
-		void move_left() { camera.set_position(glm::vec3(camera.get_position().x - velocity.x, camera.get_position().y, camera.get_position().z)); };;
-		void move_up() { camera.set_position(glm::vec3(camera.get_position().x, camera.get_position().y + velocity.y, camera.get_position().z)); };;
-		void move_down() { camera.set_position(glm::vec3(camera.get_position().x, camera.get_position().y - velocity.y, camera.get_position().z)); };
+		void move_right() { camera.set_position(glm::vec3(camera.get_position().x + velocity.x, camera.get_position().y, camera.get_position().z)); }
+		void move_left() { camera.set_position(glm::vec3(camera.get_position().x - velocity.x, camera.get_position().y, camera.get_position().z)); }
+		void move_up() { camera.set_position(glm::vec3(camera.get_position().x, camera.get_position().y + velocity.y, camera.get_position().z)); }
+		void move_down() { camera.set_position(glm::vec3(camera.get_position().x, camera.get_position().y - velocity.y, camera.get_position().z)); }
 
 		void update() override{
 			if(Input::is_key_pressed(GLFW_KEY_W)) {
