@@ -36,7 +36,11 @@
     <ClInclude Include="src\Rendering\Renderer.h" />
     <ClInclude Include="src\Rendering\Camera.h" />
     <ClInclude Include="src\Core\Input.h" />
-    <ClInclude Include="src\Shapes\View.h" />
+    <ClInclude Include="src\View\View.h" />
+    <ClInclude Include="src\View\Widget.h" />
+    <ClInclude Include="src\View\Layout.h" />
+    <ClInclude Include="src\View\Button.h" />
+    <ClInclude Include="src\View\Behaviour.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\Application.cpp">
@@ -46,5 +50,10 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="src\liffpch.cpp" />
+    <ClCompile Include="src\View\View.cpp" />
+    <ClCompile Include="src\View\Widget.cpp" />
+    <ClCompile Include="src\View\Layout.cpp" />
+    <ClCompile Include="src\View\Button.cpp" />
+    <ClCompile Include="src\View\Behaviour.cpp" />
   </ItemGroup>
 </Project>

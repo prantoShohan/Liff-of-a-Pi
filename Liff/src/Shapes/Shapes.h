@@ -28,6 +28,9 @@ namespace liff {
 					textureCoordinate.x, textureCoordinate.y,
 					textureIndex };
 		}
+
+		void set_position(const glm::vec3& position) { this->position = position; }
+		void set_color(const glm::vec4& color) { this->color = color; }
 	};
 	
 	class BufferData {
@@ -112,7 +115,13 @@ namespace liff {
 			return BufferData(vb1, { 0, 1, 2, 0, 2, 3 }, 3);
 		}
 
-		void set_color(glm::vec4 col) { color = col; }
+		void set_color(glm::vec4 col) {
+			color = col; v1.set_color(col);
+			v1.set_color(col);
+			v2.set_color(col);
+			v3.set_color(col);
+			v4.set_color(col);
+		}
 		glm::vec4 get_color() const { return color; }
 	};
 
@@ -124,7 +133,7 @@ namespace liff {
 
 	public:
 		Rectangle(const glm::vec2& pos, const glm::vec2& t, const glm::vec4& c)
-			:quad(glm::vec3(pos, 0.0f), glm::vec3(t.x, pos.y, 0.0f), glm::vec3(t, 0.0f), glm::vec3(pos.x, t.y, 0.0f), c){}
+			:quad(glm::vec3(pos, 0.0f), glm::vec3(t.x, pos.y, 0.0f), glm::vec3(t, 0.0f), glm::vec3(pos.x, t.y, 0.0f), c), position(pos), to(t){}
 
 		BufferData get_buffer_data() override {
 			return quad.get_buffer_data();

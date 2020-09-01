@@ -107,10 +107,14 @@
     <ClInclude Include="src\Rendering\Renderer.h" />
     <ClInclude Include="src\Rendering\Shader.h" />
     <ClInclude Include="src\Rendering\ShaderLibrery.h" />
+    <ClInclude Include="src\View\Behaviour.h" />
     <ClInclude Include="src\Shapes\Shapes.h" />
     <ClInclude Include="src\Rendering\VertexArray.h" />
     <ClInclude Include="src\liffpch.h" />
-    <ClInclude Include="src\Shapes\View.h" />
+    <ClInclude Include="src\View\Button.h" />
+    <ClInclude Include="src\View\Layout.h" />
+    <ClInclude Include="src\View\View.h" />
+    <ClInclude Include="src\View\Widget.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\Application.cpp" />
@@ -118,6 +122,11 @@
     <ClCompile Include="src\liffpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\View\Behaviour.cpp" />
+    <ClCompile Include="src\View\Button.cpp" />
+    <ClCompile Include="src\View\Layout.cpp" />
+    <ClCompile Include="src\View\View.cpp" />
+    <ClCompile Include="src\View\Widget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\external\GLFW.vcxproj">

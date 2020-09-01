@@ -8,6 +8,7 @@ namespace liff {
 	class RenderFrame : public EventListener {
 	protected:
 		std::shared_ptr<RenderFrame> m_renderFrame;
+		
 		virtual void render() = 0;
 
 	public:
